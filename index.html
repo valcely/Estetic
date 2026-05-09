@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esthetic Clinic Simulator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="loginScreen" class="screen">
+  <div class="card">
+    <h1>Esthetic Clinic Simulator</h1>
+    <p>Crie seu consultório</p>
+
+    <input type="text" id="clinicName" placeholder="Nome do consultório">
+
+    <select id="doctorGender">
+      <option value="dra">Dra. Esteta</option>
+      <option value="dr">Dr. Esteta</option>
+    </select>
+
+    <button onclick="startGame()">Entrar</button>
+  </div>
+</div>
+
+<div id="gameScreen" class="hidden">
+
+  <header>
+    <div>
+      <h2 id="clinicTitle"></h2>
+      <p id="profession">Especialista em Estética Avançada</p>
+    </div>
+
+    <div class="top-info">
+      <span id="clock"></span>
+      <span id="date"></span>
+      <span>Tempo jogado: <span id="gameTime">0</span> min</span>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="patient-area">
+
+      <div class="doctor">
+        <img src="https://cdn-icons-png.flaticon.com/512/2785/2785482.png">
+        <h3 id="doctorTitle"></h3>
+      </div>
+
+      <div class="patient">
+        <img id="patientImg" src="https://cdn-icons-png.flaticon.com/512/921/921071.png">
+        <h3>Paciente</h3>
+      </div>
+
+    </section>
+
+    <section class="case-panel">
+
+      <h2>Caso Clínico</h2>
+
+      <div id="caseDescription"></div>
+
+      <div class="options">
+        <button onclick="chooseTreatment('botox')">
+          Toxina Botulínica
+        </button>
+
+        <button onclick="chooseTreatment('microagulhamento')">
+          Microagulhamento
+        </button>
+
+        <button onclick="chooseTreatment('acido')">
+          Ácido Hialurônico
+        </button>
+
+        <button onclick="chooseTreatment('bioestimulador')">
+          Bioestimulador
+        </button>
+      </div>
+
+      <div id="feedback"></div>
+
+      <div class="progress">
+        <p>Nível: <span id="level">1</span></p>
+        <p>XP: <span id="xp">0</span></p>
+      </div>
+
+      <button onclick="nextCase()">
+        Próximo Paciente
+      </button>
+
+    </section>
+
+    <section class="protocol-panel">
+
+      <h2>Protocolo Científico</h2>
+
+      <div id="scientificInfo">
+        Escolha um procedimento para receber instruções.
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
