@@ -1,116 +1,342 @@
-body{
+*{
   margin:0;
-  font-family:Arial, sans-serif;
-  background:#111827;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:black;
   color:white;
+  overflow:hidden;
 }
 
 .hidden{
   display:none;
 }
 
-.screen{
+.background{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:
+  linear-gradient(rgba(0,0,0,0.8),
+  rgba(0,0,0,0.9)),
+  url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?q=80&w=1600&auto=format&fit=crop');
+
+  background-size:cover;
+  background-position:center;
+
+  z-index:-3;
+}
+
+.particles{
+  position:fixed;
+  width:100%;
+  height:100%;
+  z-index:-2;
+}
+
+.particles::before{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+
+  background-image:
+  radial-gradient(#d4af37 1px,transparent 1px);
+
+  background-size:50px 50px;
+
+  opacity:0.2;
+
+  animation:particles 30s linear infinite;
+}
+
+@keyframes particles{
+
+  from{
+    transform:translateY(0);
+  }
+
+  to{
+    transform:translateY(-120px);
+  }
+
+}
+
+.login-screen{
+  width:100%;
+  height:100vh;
+
   display:flex;
   justify-content:center;
   align-items:center;
-  height:100vh;
 }
 
-.card{
-  background:#1f2937;
-  padding:30px;
-  border-radius:20px;
-  width:320px;
+.glass-card{
+  width:420px;
+
+  padding:40px;
+
+  border-radius:30px;
+
+  background:rgba(255,255,255,0.05);
+
+  backdrop-filter:blur(20px);
+
+  border:1px solid rgba(255,255,255,0.1);
+
+  box-shadow:0 0 50px rgba(212,175,55,0.15);
+}
+
+.glass-card h1{
   text-align:center;
-  box-shadow:0 0 30px rgba(0,0,0,0.4);
+  font-size:42px;
+}
+
+.subtitle{
+  text-align:center;
+  margin-top:10px;
+  margin-bottom:25px;
+  opacity:0.7;
 }
 
 input,
-select,
-button{
+select{
   width:100%;
-  padding:12px;
-  margin-top:12px;
+
+  padding:16px;
+
+  margin-top:15px;
+
   border:none;
-  border-radius:10px;
-  font-size:16px;
+
+  border-radius:18px;
+
+  background:rgba(255,255,255,0.08);
+
+  color:white;
 }
 
 button{
-  cursor:pointer;
+  width:100%;
+
+  padding:16px;
+
+  margin-top:15px;
+
+  border:none;
+
+  border-radius:18px;
+
+  background:
+  linear-gradient(45deg,#d4af37,#ffe49a);
+
+  color:black;
+
   font-weight:bold;
+
+  cursor:pointer;
+
   transition:0.3s;
 }
 
 button:hover{
   transform:scale(1.03);
+
+  box-shadow:0 0 25px rgba(212,175,55,0.4);
+}
+
+.game-screen{
+  width:100%;
+  height:100vh;
 }
 
 header{
+  width:100%;
+  height:100px;
+
+  padding:20px 40px;
+
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:20px;
-  background:#0f172a;
-  border-bottom:2px solid rgba(255,255,255,0.1);
+
+  background:rgba(255,255,255,0.03);
+
+  backdrop-filter:blur(12px);
+
+  border-bottom:1px solid rgba(255,255,255,0.08);
 }
 
-.top-info{
+.profile h2{
+  font-size:28px;
+}
+
+.profile span{
+  color:#d4af37;
+}
+
+.hud{
   display:flex;
-  gap:15px;
-  font-size:14px;
+  gap:20px;
+}
+
+.hud-box{
+  width:120px;
+  height:75px;
+
+  border-radius:20px;
+
+  background:rgba(255,255,255,0.05);
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
 }
 
 main{
+  width:100%;
+  height:calc(100vh - 100px);
+
   display:grid;
   grid-template-columns:1fr 1fr 1fr;
+
   gap:20px;
+
   padding:20px;
 }
 
-.patient-area,
-.case-panel,
-.protocol-panel{
-  background:#1e293b;
+.left-panel,
+.center-panel,
+.right-panel{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.doctor-card,
+.patient-card,
+.zoom-card,
+.science-card,
+.feedback{
+  background:rgba(255,255,255,0.05);
+
+  border:1px solid rgba(255,255,255,0.08);
+
+  border-radius:30px;
+
+  overflow:hidden;
+
+  backdrop-filter:blur(15px);
+}
+
+.floating{
+  animation:floating 5s ease-in-out infinite;
+}
+
+@keyframes floating{
+
+  0%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-8px);
+  }
+
+  100%{
+    transform:translateY(0);
+  }
+
+}
+
+.doctor-img,
+.patient-img{
+  width:100%;
+  height:320px;
+
+  object-fit:cover;
+}
+
+.doctor-info,
+.patient-info{
   padding:20px;
-  border-radius:20px;
-  min-height:500px;
 }
 
-.patient-area{
-  text-align:center;
+#patientIssue{
+  color:#d4af37;
 }
 
-.patient-area img{
-  width:150px;
-  margin-top:20px;
+.zoom-card{
+  position:relative;
+  height:450px;
 }
 
-.options{
+.zoom-face{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  transition:1s;
+}
+
+.zoom-face:hover{
+  transform:scale(1.08);
+}
+
+.scan-line{
+  position:absolute;
+
+  width:100%;
+  height:4px;
+
+  background:#d4af37;
+
+  box-shadow:0 0 20px #d4af37;
+
+  animation:scan 4s linear infinite;
+}
+
+@keyframes scan{
+
+  0%{
+    top:0;
+  }
+
+  100%{
+    top:100%;
+  }
+
+}
+
+.procedure-buttons{
   display:grid;
-  gap:10px;
-  margin-top:20px;
+  gap:15px;
 }
 
-#feedback{
-  margin-top:20px;
-  font-size:18px;
+.feedback{
+  padding:25px;
+
+  text-align:center;
+
   font-weight:bold;
 }
 
-.progress{
-  margin-top:20px;
-}
+.science-card{
+  padding:25px;
 
-.protocol-panel{
   line-height:1.8;
 }
 
-h2{
-  margin-top:0;
-}
+@media(max-width:1100px){
 
-@media(max-width:900px){
+  body{
+    overflow:auto;
+  }
 
   main{
     grid-template-columns:1fr;
