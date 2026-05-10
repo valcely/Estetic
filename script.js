@@ -1,188 +1,260 @@
 let xp = 0;
+
 let level = 1;
-let gameMinutes = 0;
 
-const clinicalCases = [
+let coins = 100;
 
-  {
-    description:
-    "Paciente com ptose leve de sobrancelha e rugas dinâmicas na testa.",
+const cases = [
 
-    correct: "botox",
+{
 
-    protocol: `
-      <h3>Toxina Botulínica</h3>
+  patient:"Ana Paula",
 
-      <p>
-      Aplicação sugerida em músculos frontais
-      com avaliação individual.
-      </p>
+  age:"36 anos",
 
-      <p>
-      Ângulo sugerido: 45°
-      </p>
+  issue:"Rugas frontais e flacidez",
 
-      <p>
-      Objetivo:
-      suavizar contração muscular excessiva.
-      </p>
+  image:
+  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop",
 
-      <p>
-      Importante avaliar simetria facial
-      e anatomia.
-      </p>
-    `
-  },
+  correct:"botox",
 
-  {
-    description:
-    "Paciente com cicatrizes de acne e textura irregular.",
+  science:`
 
-    correct: "microagulhamento",
+  <h3>Toxina Botulínica</h3>
 
-    protocol: `
-      <h3>Microagulhamento</h3>
+  <p>
+  Objetivo:
+  suavização de rugas dinâmicas.
+  </p>
 
-      <p>
-      Estimulação de colágeno
-      com drug delivery.
-      </p>
+  <p>
+  Aplicação intramuscular superficial.
+  </p>
 
-      <p>
-      Profundidade varia conforme região.
-      </p>
+  <p>
+  Ângulo sugerido:
+  45°.
+  </p>
 
-      <p>
-      Indicado para textura
-      e cicatrizes.
-      </p>
-    `
-  },
+  <p>
+  Avaliar:
+  simetria e anatomia facial.
+  </p>
 
-  {
-    description:
-    "Paciente com sulco nasogeniano profundo e perda de volume facial.",
+  `
+},
 
-    correct: "acido",
+{
 
-    protocol: `
-      <h3>Ácido Hialurônico</h3>
+  patient:"Lucas Martins",
 
-      <p>
-      Reposição volumétrica estratégica.
-      </p>
+  age:"29 anos",
 
-      <p>
-      Avaliar plano anatômico correto.
-      </p>
+  issue:"Cicatrizes atróficas",
 
-      <p>
-      Cuidado com vasos faciais.
-      </p>
-    `
-  }
+  image:
+  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop",
+
+  correct:"micro",
+
+  science:`
+
+  <h3>Microagulhamento</h3>
+
+  <p>
+  Estímulo de colágeno.
+  </p>
+
+  <p>
+  Indicado para:
+  textura irregular.
+  </p>
+
+  <p>
+  Técnica:
+  múltiplas punturas controladas.
+  </p>
+
+  `
+}
 
 ];
 
 let currentCase = 0;
 
+function playClick(){
+
+  document
+  .getElementById("clickSound")
+  .play();
+
+}
+
 function startGame(){
 
-  const clinicName =
-    document.getElementById("clinicName").value;
+  playClick();
 
-  const doctorGender =
-    document.getElementById("doctorGender").value;
+  const doctor =
+  document
+  .getElementById("doctorName")
+  .value;
+
+  const profession =
+  document
+  .getElementById("profession")
+  .value;
+
+  const clinic =
+  document
+  .getElementById("clinicName")
+  .value;
 
   document
-    .getElementById("loginScreen")
-    .classList.add("hidden");
+  .getElementById("loginScreen")
+  .classList.add("hidden");
 
   document
-    .getElementById("gameScreen")
-    .classList.remove("hidden");
+  .getElementById("gameScreen")
+  .classList.remove("hidden");
 
   document
-    .getElementById("clinicTitle")
-    .innerText = clinicName;
+  .getElementById("doctorDisplay")
+  .innerText =
+  `Dra. ${doctor}`;
 
   document
-    .getElementById("doctorTitle")
-    .innerText =
-      doctorGender === "dra"
-      ? "Dra. Esteta"
-      : "Dr. Esteta";
+  .getElementById("doctorCardName")
+  .innerText =
+  `Dra. ${doctor}`;
+
+  document
+  .getElementById("professionDisplay")
+  .innerText =
+  profession;
+
+  document
+  .getElementById("doctorCardProfession")
+  .innerText =
+  profession;
+
+  document
+  .getElementById("clinicDisplay")
+  .innerText =
+  clinic;
 
   loadCase();
+
 }
 
 function loadCase(){
 
-  const caseData = clinicalCases[currentCase];
+  const data =
+  cases[currentCase];
 
   document
-    .getElementById("caseDescription")
-    .innerHTML = `
-      <p>${caseData.description}</p>
-    `;
+  .getElementById("patientName")
+  .innerText =
+  data.patient;
 
   document
-    .getElementById("feedback")
-    .innerHTML = "";
+  .getElementById("patientAge")
+  .innerText =
+  `${data.age} • Fototipo III`;
 
   document
-    .getElementById("scientificInfo")
-    .innerHTML =
-      "Escolha um procedimento.";
+  .getElementById("patientIssue")
+  .innerText =
+  data.issue;
+
+  document
+  .getElementById("patientImage")
+  .src =
+  data.image;
+
+  document
+  .getElementById("zoomFace")
+  .src =
+  data.image;
+
+  document
+  .getElementById("scienceContent")
+  .innerHTML =
+  `
+  <p>
+  Selecione um procedimento.
+  </p>
+  `;
+
 }
 
-function chooseTreatment(choice){
+function chooseProcedure(choice){
 
-  const caseData = clinicalCases[currentCase];
+  playClick();
+
+  const data =
+  cases[currentCase];
 
   document
-    .getElementById("scientificInfo")
-    .innerHTML = caseData.protocol;
+  .getElementById("scienceContent")
+  .innerHTML =
+  data.science;
 
-  if(choice === caseData.correct){
+  if(choice === data.correct){
 
-    xp += 20;
+    xp += 30;
 
-    if(xp >= level * 50){
+    coins += 20;
+
+    if(xp >= level * 100){
+
       level++;
+
     }
 
     document
-      .getElementById("feedback")
-      .innerHTML =
-      "✅ Conduta correta!";
+    .getElementById("feedback")
+    .innerText =
+    "✅ Procedimento executado com sucesso.";
 
   }else{
 
     document
-      .getElementById("feedback")
-      .innerHTML =
-      "❌ Reveja anatomia e protocolo.";
+    .getElementById("feedback")
+    .innerText =
+    "❌ Técnica incorreta para este caso.";
+
   }
 
   document
-    .getElementById("xp")
-    .innerText = xp;
+  .getElementById("xp")
+  .innerText =
+  xp;
 
   document
-    .getElementById("level")
-    .innerText = level;
-}
+  .getElementById("coins")
+  .innerText =
+  coins;
 
-function nextCase(){
+  document
+  .getElementById("level")
+  .innerText =
+  level;
 
-  currentCase++;
+  setTimeout(()=>{
 
-  if(currentCase >= clinicalCases.length){
-    currentCase = 0;
-  }
+    currentCase++;
 
-  loadCase();
+    if(currentCase >= cases.length){
+
+      currentCase = 0;
+
+    }
+
+    loadCase();
+
+  },4000);
+
 }
 
 setInterval(()=>{
@@ -190,23 +262,13 @@ setInterval(()=>{
   const now = new Date();
 
   document
-    .getElementById("clock")
-    .innerText =
-    now.toLocaleTimeString("pt-BR");
+  .getElementById("clock")
+  .innerText =
+  now.toLocaleTimeString("pt-BR");
 
   document
-    .getElementById("date")
-    .innerText =
-    now.toLocaleDateString("pt-BR");
+  .getElementById("date")
+  .innerText =
+  now.toLocaleDateString("pt-BR");
 
 },1000);
-
-setInterval(()=>{
-
-  gameMinutes++;
-
-  document
-    .getElementById("gameTime")
-    .innerText = gameMinutes;
-
-},60000);
